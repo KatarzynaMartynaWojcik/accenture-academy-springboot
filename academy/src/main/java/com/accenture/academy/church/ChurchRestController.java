@@ -1,6 +1,8 @@
 package com.accenture.academy.church;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,17 +16,35 @@ public class ChurchRestController {
 
     @GetMapping
     List<ChurchDao> getAllChurches(){
-//        ChurchDto churchDto = new ChurchDto(
-//                "Kościół św. Krzyża",
-//                "Warszawa",
-//                150,
-//                10000,
-//                20000.00
-//        );
         return churchService.getAllChurches();
+    }
+
+    @GetMapping(path = "/{id}")
+   ResponseEntity getChurchById(@PathVariable Long id) {
+        try {
+            return ResponseEntity
+                    .status(200)
+                    .body(churchService.getChurchById(id));
+        } catch (ChurchNotFoundException exception) {
+            return ResponseEntity
+                    .status(404)
+                    .body(exception.getMessage());
+        }
     }
     @PostMapping
     void addChurch(@RequestBody ChurchDto churchDto){
        churchService.addChurchDto(churchDto);
     }
+    @PutMapping(path="/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void updateChurch(@RequestBody ChurchDto churchDto, @PathVariable Long id){
+        churchService.update(churchDto, id);
+    }
+
+    @DeleteMapping(path="/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteChurchById(@PathVariable Long id){
+        churchService.deleteById(id);
+    }
+
 }

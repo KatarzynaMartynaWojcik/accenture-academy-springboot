@@ -21,4 +21,10 @@ public class PriestService {
         priestRepository.save(priestDao);
     }
 
+    public PriestDao getPriestById(Long id){
+        return priestRepository
+                .findById(id)
+                .orElseThrow(() -> new PriestNotFoundException("Priest with " + id + " not found"));
+    }
+
 }

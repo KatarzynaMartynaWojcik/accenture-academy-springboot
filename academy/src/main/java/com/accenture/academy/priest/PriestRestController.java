@@ -3,9 +3,9 @@ package com.accenture.academy.priest;
 import com.accenture.academy.church.ChurchDao;
 import com.accenture.academy.church.ChurchService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,8 +15,15 @@ import java.util.List;
 public class PriestRestController {
 
     private final PriestService priestService;
+
     @GetMapping
-    List<PriestDao> getAllPriests(){
+    List<PriestDao> getAllPriests() {
         return priestService.getAllPriests();
+    }
+
+    @GetMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    PriestDao getPriestById(@PathVariable Long id) {
+        return priestService.getPriestById(id);
     }
 }

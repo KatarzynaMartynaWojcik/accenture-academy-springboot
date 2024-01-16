@@ -25,4 +25,18 @@ public class ChurchService {
 
         churchRepository.save(ChurchMapper.mapDtoToDao(churchDto));
     }
+
+    ChurchDao getChurchById(Long id) {
+        return churchRepository
+                .findById(id)
+                .orElseThrow(()-> new ChurchNotFoundException("Church with id " + id + " not found"));
+    }
+
+    public void update(ChurchDto churchDto, Long id) {
+        churchRepository.save(ChurchMapper.mapDtoToDao(churchDto, id));
+    }
+
+    public void deleteById(Long id) {
+        churchRepository.deleteById(id);
+    }
 }

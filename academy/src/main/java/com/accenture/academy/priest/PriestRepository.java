@@ -6,10 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
 public class PriestRepository {
+
     private final IPriestRepository iPriestRepository;
     public List<PriestDao> findAll() {
 
@@ -21,4 +23,7 @@ public class PriestRepository {
         iPriestRepository.save(priestDao);
     }
 
+    public Optional<PriestDao> findById(Long id) {
+        return iPriestRepository.findById(id);
+    }
 }
