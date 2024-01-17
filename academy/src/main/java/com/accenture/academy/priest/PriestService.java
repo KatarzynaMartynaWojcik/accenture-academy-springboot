@@ -1,6 +1,7 @@
 package com.accenture.academy.priest;
 
 import com.accenture.academy.church.ChurchDao;
+import com.accenture.academy.church.ChurchMapper;
 import com.accenture.academy.church.ChurchRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,4 +28,17 @@ public class PriestService {
                 .orElseThrow(() -> new PriestNotFoundException("Priest with " + id + " not found"));
     }
 
+    public PriestDao getPriestByName(String name) {
+        return priestRepository
+                .findByName(name)
+                .orElseThrow(() -> new PriestNameNotFoundException("Priest name " + name + " not found"));
+    }
+
+    public void deleteById(Long id) {
+        priestRepository.deleteById(id);
+    }
+
+    public void update(PriestDto priestDto, Long id) {
+        priestRepository.save(PriestMapper.mapDtoToDao(priestDto, id));
+    }
 }

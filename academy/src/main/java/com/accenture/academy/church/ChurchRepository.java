@@ -17,6 +17,7 @@ public class ChurchRepository {
     }
 
     public void save(ChurchDao churchDao) {
+
         iChurchRepository.save(churchDao);
     }
 
@@ -26,5 +27,9 @@ public class ChurchRepository {
 
     public void deleteById(Long id) {
         iChurchRepository.deleteById(id);
+    }
+
+    public List<ChurchDao> findAllByName(Optional<String> name) {
+        return iChurchRepository.findAllByNameContaining(name);
     }
 }

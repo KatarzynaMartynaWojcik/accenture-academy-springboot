@@ -24,6 +24,17 @@ public class PriestRepository {
     }
 
     public Optional<PriestDao> findById(Long id) {
+
         return iPriestRepository.findById(id);
     }
+
+    public Optional<PriestDao> findByName(String name) {
+        return iPriestRepository.findByName(name);
+    }
+
+    public void deleteById(Long id) {
+        iPriestRepository.deleteById(id);
+    }
+
+
 }

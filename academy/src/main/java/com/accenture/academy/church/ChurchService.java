@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -38,5 +39,9 @@ public class ChurchService {
 
     public void deleteById(Long id) {
         churchRepository.deleteById(id);
+    }
+
+    public List<ChurchDao> getAllByName(Optional<String> name) {
+        return churchRepository.findAllByName(name);
     }
 }
