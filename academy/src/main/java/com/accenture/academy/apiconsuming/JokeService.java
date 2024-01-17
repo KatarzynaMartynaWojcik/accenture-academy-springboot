@@ -48,4 +48,37 @@ public class JokeService {
         log.info(String.valueOf(joke.getId()));
 
     }
+
+    public Joke getRandomJoke() throws IOException, InterruptedException {
+
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest httpRequest = HttpRequest
+                .newBuilder()
+                .GET()
+                .uri(URI.create("https://official-joke-api.appspot.com/random_joke"))
+                .build();
+        HttpResponse httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+        String response = httpResponse.body().toString();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Joke joke = objectMapper.readValue(response, Joke.class);
+
+        log.info("Type");
+        log.info(joke.getType());
+
+        log.info("Punchline");
+        log.info(joke.getPunchline());
+
+        log.info("Setup");
+        log.info(joke.getSetup());
+
+        log.info("Id");
+        log.info(String.valueOf(joke.getId()));
+
+        return joke;
+
+
+
+    }
+
 }
