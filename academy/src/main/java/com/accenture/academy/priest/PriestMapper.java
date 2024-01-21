@@ -12,4 +12,13 @@ public class PriestMapper {
 
         return priestDao;
     }
+    static PriestDao mapDtoToDao(PriestDto priestDto){
+        PriestDao priestDao = new PriestDao();
+        priestDao.setName(priestDto.getName());
+        priestDao.setHeight(priestDto.getHeight());
+        priestDao.setAge(priestDto.getAge());
+
+
+        return priestDao;
+    }
 }

@@ -1,5 +1,7 @@
 package com.accenture.academy.church;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +27,11 @@ public class ChurchRestController {
 
     @GetMapping(path = "/{id}")
    ResponseEntity getChurchById(@PathVariable Long id) {
+
         try {
             return ResponseEntity
                     .status(200)
+                    .header("ej", "ho")
                     .body(churchService.getChurchById(id));
         } catch (ChurchNotFoundException exception) {
             return ResponseEntity
@@ -36,7 +40,7 @@ public class ChurchRestController {
         }
     }
     @PostMapping
-    void addChurch(@RequestBody ChurchDto churchDto){
+    void addChurch(@RequestBody @Valid ChurchDto churchDto){
        churchService.addChurchDto(churchDto);
     }
     @PutMapping(path="/{id}")

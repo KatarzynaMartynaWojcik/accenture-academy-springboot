@@ -1,6 +1,7 @@
 package com.accenture.academy.priest;
 
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,5 +50,10 @@ public class PriestRestController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void updatePriest(@RequestBody PriestDto priestDto, @PathVariable Long id){
         priestService.update(priestDto, id);
+    }
+
+    @PostMapping
+    void addPriest(@RequestBody @Valid PriestDto priestDto){
+        priestService.addPriestDto(priestDto);
     }
 }

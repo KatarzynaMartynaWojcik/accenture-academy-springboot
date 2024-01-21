@@ -17,7 +17,7 @@ public class PriestService {
         return priestRepository.findAll();
     }
 
-    void addPriest(PriestDao priestDao){
+    public void addPriest(PriestDao priestDao){
 
         priestRepository.save(priestDao);
     }
@@ -40,5 +40,9 @@ public class PriestService {
 
     public void update(PriestDto priestDto, Long id) {
         priestRepository.save(PriestMapper.mapDtoToDao(priestDto, id));
+    }
+
+    public void addPriestDto(PriestDto priestDto) {
+        priestRepository.save(PriestMapper.mapDtoToDao(priestDto));
     }
 }
