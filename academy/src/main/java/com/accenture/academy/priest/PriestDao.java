@@ -14,8 +14,12 @@ public class PriestDao {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    @Column(name= "height")
     private Integer height;
     private Integer age;
+
+    @Embedded
+    Location location;
 
     public PriestDao(String name, Integer height, Integer age) {
         this.name = name;
