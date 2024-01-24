@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-class ChurchDto {
+public class ChurchDto {
 
    @NotNull(message="Name must not be null")
    private String name;
